@@ -1,0 +1,9 @@
+﻿streamlit>=1.46.0
+transformers>=4.52.0
+huggingface_hub>=0.32.0
+torch>=2.6.0
+pandas>=2.2.0
+numpy>=1.26.0
+sentencepiece>=0.2.0
+safetensors>=0.5.0
+pytest>=8.0.0
