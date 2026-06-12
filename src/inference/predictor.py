@@ -64,9 +64,14 @@ class MunicipalityQuestionPredictor:
             if self._has_model_artifacts(target_dir):
                 return target_dir
 
+            raise FileNotFoundError(
+                "Se intento descargar el modelo desde Hugging Face, pero faltan archivos requeridos "
+                f"en '{target_dir}'. Revisa MODEL_REPO_ID y el contenido publicado del modelo."
+            )
+
         raise FileNotFoundError(
             "No se encontro un modelo utilizable. "
-            f"Se busco en '{model_dir}' y no hubo descarga disponible desde MODEL_REPO_ID."
+            f"Se busco en '{model_dir}' y no existe MODEL_REPO_ID configurado para descarga remota."
         )
 
     def _load_labels(self) -> dict[int, str]:
