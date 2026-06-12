@@ -37,7 +37,7 @@ MODEL_REPO_ID = get_setting("MODEL_REPO_ID")
 MODEL_REVISION = get_setting("MODEL_REVISION", "main") or "main"
 MODEL_CACHE_DIR = Path(get_setting("MODEL_CACHE_DIR", str(DATA_DIR / "model_cache")))
 DATABASE_PATH = Path(get_setting("DATABASE_PATH", str(DATA_DIR / "feedback.db")))
-APP_TITLE = get_setting("APP_TITLE", "Validador de Preguntas para Chatbot Municipal") or "Validador de Preguntas para Chatbot Municipal"
+APP_TITLE = get_setting("APP_TITLE", "APP_VALIDACION_CONSULTA") or "APP_VALIDACION_CONSULTA"
 MAX_TEXT_LENGTH = 512
 DEFAULT_HISTORY_LIMIT = 100
 

@@ -1,9 +1,9 @@
-﻿# Validacion de Clasificacion de Preguntas Municipio
+# APP_VALIDACION_CONSULTA
 
 Aplicacion local en Streamlit para probar un modelo ya entrenado que clasifica preguntas para un chatbot municipal en dos clases:
 
 - `valida`: la pregunta pertenece al dominio del municipio.
-- `no_valida`: la pregunta es fuera de dominio, intenta usar el bot como ChatGPT, o busca vulnerar seguridad / extraer datos.
+- `no_valida`: la pregunta es fuera de dominio, intenta usar el bot como ChatGPT, o busca vulnerar seguridad o extraer datos.
 
 ## Que incluye este repositorio
 
@@ -16,31 +16,31 @@ Aplicacion local en Streamlit para probar un modelo ya entrenado que clasifica p
 ## Estructura
 
 ```text
-VALIDACION_CLASIFICACION_PREGUNTAS_MUNICIPIO/
-├─ app/
-│  └─ streamlit_app.py
-├─ data/
-│  ├─ raw/
-│  │  └─ municipio_validacion_preguntas_400.csv
-│  └─ feedback.db
-├─ models/
-│  ├─ README.md
-│  └─ municipio_question_validator/   # ignorado por Git
-├─ src/
-│  ├─ config.py
-│  ├─ inference/
-│  │  └─ predictor.py
-│  ├─ services/
-│  │  └─ validation_service.py
-│  └─ storage/
-│     ├─ repository.py
-│     └─ schema.sql
-├─ tests/
-│  └─ test_repository.py
-├─ streamlit_app.py
-├─ requirements.txt
-├─ .gitignore
-└─ README.md
+APP_VALIDACION_CONSULTA/
+|- app/
+|  \- streamlit_app.py
+|- data/
+|  |- raw/
+|  |  \- municipio_validacion_preguntas_400.csv
+|  \- feedback.db
+|- models/
+|  |- README.md
+|  \- municipio_question_validator/   # ignorado por Git
+|- src/
+|  |- config.py
+|  |- inference/
+|  |  \- predictor.py
+|  |- services/
+|  |  \- validation_service.py
+|  \- storage/
+|     |- repository.py
+|     \- schema.sql
+|- tests/
+|  \- test_repository.py
+|- streamlit_app.py
+|- requirements.txt
+|- .gitignore
+\- README.md
 ```
 
 ## Modelo
@@ -55,7 +55,7 @@ models/municipio_question_validator
 
 Tambien puedes usar otra ruta configurando la variable de entorno `MODEL_DIR`.
 
-Para despliegue, la app ahora soporta dos modos:
+Para despliegue, la app soporta dos modos:
 
 1. Modelo local en `MODEL_DIR`.
 2. Descarga automatica desde Hugging Face si defines `MODEL_REPO_ID`.
@@ -131,7 +131,7 @@ Si el modelo remoto es publico, no necesitas token. Si fuera privado, haria falt
 
 Valores recomendados al crear la app:
 
-- Repository: `Nahuel247/VALIDACION_CLASIFICACION_PREGUNTAS_MUNICIPIO`
+- Repository: `Nahuel247/APP_VALIDACION_CONSULTA`
 - Branch: `main`
 - Main file path: `streamlit_app.py`
 - Python version: `3.12`
@@ -148,7 +148,7 @@ Flujo:
 
 1. Entra a [share.streamlit.io](https://share.streamlit.io/).
 2. Haz clic en `Create app`.
-3. Selecciona el repo `Nahuel247/VALIDACION_CLASIFICACION_PREGUNTAS_MUNICIPIO`.
+3. Selecciona el repo `Nahuel247/APP_VALIDACION_CONSULTA`.
 4. Usa `streamlit_app.py` como archivo principal.
 5. En `Advanced settings`, elige Python `3.12` y pega tus secrets.
 6. Despliega la app.
@@ -173,7 +173,7 @@ El historial se ordena por `interacciones = veces_preguntada + votos positivos +
 
 ## Relacion con el repositorio de entrenamiento
 
-Este repositorio fue pensado para desacoplar la demo / inferencia del pipeline de entrenamiento. El script original de entrenamiento y la investigacion del modelo deben mantenerse en otro repositorio y otra publicacion.
+Este repositorio fue pensado para desacoplar la demo o inferencia del pipeline de entrenamiento. El script original de entrenamiento y la investigacion del modelo deben mantenerse en otro repositorio y otra publicacion.
 
 ## Mejoras futuras
 
