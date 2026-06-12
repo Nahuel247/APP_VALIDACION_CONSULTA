@@ -30,6 +30,10 @@ OBSCENE_PATTERNS = (
     r"\bwn\b",
 )
 
+SEXUAL_PATTERNS = (
+    r"\bchupa(?:r|s|la|lo|le|las|los)?\b",
+)
+
 
 def _normalize_text(text: str) -> str:
     normalized = unicodedata.normalize("NFKD", text.casefold())
@@ -46,6 +50,14 @@ def apply_guardrails(question_text: str) -> GuardrailResult | None:
                 predicted_label="no_valida",
                 probabilities={"valida": 0.0, "no_valida": 1.0},
                 applied_rule="lenguaje_obsceno",
+            )
+
+    for pattern in SEXUAL_PATTERNS:
+        if re.search(pattern, normalized_text):
+            return GuardrailResult(
+                predicted_label="no_valida",
+                probabilities={"valida": 0.0, "no_valida": 1.0},
+                applied_rule="contenido_sexual",
             )
 
     return None
