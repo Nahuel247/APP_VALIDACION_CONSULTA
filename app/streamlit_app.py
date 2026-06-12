@@ -300,6 +300,8 @@ with main_tab:
                 col_a, col_b = st.columns(2)
                 col_a.metric("Probabilidad valida", format_percent(result.probabilities.get("valida", 0.0)))
                 col_b.metric("Probabilidad no valida", format_percent(result.probabilities.get("no_valida", 0.0)))
+                if result.applied_rule:
+                    st.caption(f"Regla aplicada: `{result.applied_rule}`")
 
                 current_vote_state_key = f"voted_{stored.id}"
                 current_disable_vote = bool(st.session_state.get(current_vote_state_key, False))

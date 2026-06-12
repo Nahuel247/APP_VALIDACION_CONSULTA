@@ -10,6 +10,7 @@ from huggingface_hub import snapshot_download
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 from src.config import MAX_TEXT_LENGTH, MODEL_CACHE_DIR, MODEL_REPO_ID, MODEL_REVISION
+from src.inference.guardrails import apply_guardrails
 
 
 @dataclass(slots=True)
@@ -18,6 +19,7 @@ class PredictionResult:
     predicted_label: str
     confidence: float
     probabilities: dict[str, float]
+    applied_rule: str | None = None
 
 
 class MunicipalityQuestionPredictor:
@@ -92,6 +94,16 @@ class MunicipalityQuestionPredictor:
         if not cleaned_text:
             raise ValueError("La pregunta no puede estar vacia.")
 
+        guardrail_result = apply_guardrails(cleaned_text)
+        if guardrail_result is not None:
+            return PredictionResult(
+                question_text=cleaned_text,
+                predicted_label=guardrail_result.predicted_label,
+                confidence=guardrail_result.probabilities[guardrail_result.predicted_label],
+                probabilities=guardrail_result.probabilities,
+                applied_rule=guardrail_result.applied_rule,
+            )
+
         encoded = self.tokenizer(
             cleaned_text,
             truncation=True,
@@ -116,6 +128,7 @@ class MunicipalityQuestionPredictor:
             predicted_label=predicted_label,
             confidence=probabilities[predicted_label],
             probabilities=probabilities,
+            applied_rule=None,
         )
 
     def metadata(self) -> dict[str, Any]:
