@@ -37,6 +37,7 @@ VALIDACION_CLASIFICACION_PREGUNTAS_MUNICIPIO/
 │     └─ schema.sql
 ├─ tests/
 │  └─ test_repository.py
+├─ streamlit_app.py
 ├─ requirements.txt
 ├─ .gitignore
 └─ README.md
@@ -76,7 +77,7 @@ pip install -r requirements.txt
 ## Ejecutar la app
 
 ```bash
-streamlit run app/streamlit_app.py
+streamlit run streamlit_app.py
 ```
 
 ## Variables configurables
@@ -125,6 +126,32 @@ MODEL_REVISION = "main"
 ```
 
 Si el modelo remoto es publico, no necesitas token. Si fuera privado, haria falta agregar un token de Hugging Face y extender la app para usarlo.
+
+## Checklist para Streamlit Community Cloud
+
+Valores recomendados al crear la app:
+
+- Repository: `Nahuel247/VALIDACION_CLASIFICACION_PREGUNTAS_MUNICIPIO`
+- Branch: `main`
+- Main file path: `streamlit_app.py`
+- Python version: `3.12`
+
+Secrets sugeridos para pegar en `Advanced settings > Secrets`:
+
+```toml
+ADMIN_PASSWORD = "tu-clave-segura"
+MODEL_REPO_ID = "tu-usuario/tu-modelo"
+MODEL_REVISION = "main"
+```
+
+Flujo:
+
+1. Entra a [share.streamlit.io](https://share.streamlit.io/).
+2. Haz clic en `Create app`.
+3. Selecciona el repo `Nahuel247/VALIDACION_CLASIFICACION_PREGUNTAS_MUNICIPIO`.
+4. Usa `streamlit_app.py` como archivo principal.
+5. En `Advanced settings`, elige Python `3.12` y pega tus secrets.
+6. Despliega la app.
 
 ## Como funciona el feedback
 
