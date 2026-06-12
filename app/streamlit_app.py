@@ -197,10 +197,33 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-service = get_service()
+summary = None
+metadata = None
+is_admin = admin_mode_enabled()
+
+try:
+    service = get_service()
+except FileNotFoundError as exc:
+    st.title(APP_TITLE)
+    st.error("No fue posible cargar el modelo para iniciar la aplicacion.")
+    st.markdown(
+        """
+        Revisa esta configuracion en Streamlit Community Cloud:
+
+        ```toml
+        MODEL_REPO_ID = "tu-usuario/tu-modelo"
+        MODEL_REVISION = "main"
+        ADMIN_PASSWORD = "tu-clave-segura"
+        ```
+
+        Si no usaras Hugging Face, entonces debes incluir un modelo local utilizable en la ruta configurada por `MODEL_DIR`.
+        """
+    )
+    st.code(str(exc))
+    st.stop()
+
 summary = service.summary()
 metadata = service.predictor.metadata()
-is_admin = admin_mode_enabled()
 
 st.title(APP_TITLE)
 st.caption(
